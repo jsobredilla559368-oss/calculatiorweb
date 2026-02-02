@@ -15,7 +15,7 @@ function appendNumber(number) {
 function appendOperator(operator) {
     const lastChar = display.value.slice(-1);
     if (display.value === '') return;
-    
+
     // Allow % to be appended after a number or closing parenthesis
     if (operator === '%') {
         if (lastChar === '') return;
