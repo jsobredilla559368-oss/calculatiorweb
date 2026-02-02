@@ -33,7 +33,12 @@ function deleteLast() {
 function calculate() {
     try {
         if (display.value === '') return;
-        let result = eval(display.value);
+        
+        // Handle percentage calculations (e.g., 850 * 20% = 850 * 0.20)
+        let expression = display.value;
+        expression = expression.replace(/(\d+(?:\.\d+)?)\s*%/g, '($1/100)');
+        
+        let result = eval(expression);
         if (!isFinite(result) || isNaN(result)) {
             display.value = 'Error';
         } else {
