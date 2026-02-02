@@ -14,8 +14,16 @@ function appendNumber(number) {
 
 function appendOperator(operator) {
     const lastChar = display.value.slice(-1);
-    if (display.value === '' || ['+', '-', '*', '/', '%'].includes(lastChar)) return;
-    display.value += operator;
+    if (display.value === '') return;
+    
+    // Allow % to be appended after a number or closing parenthesis
+    if (operator === '%') {
+        if (lastChar === '') return;
+        display.value += operator;
+    } else {
+        if (['+', '-', '*', '/', '%'].includes(lastChar)) return;
+        display.value += operator;
+    }
 }
 
 function clearDisplay() {
@@ -33,11 +41,11 @@ function deleteLast() {
 function calculate() {
     try {
         if (display.value === '') return;
-        
-        // Handle percentage calculations (e.g., 850 * 20% = 850 * 0.20)
+
+
         let expression = display.value;
         expression = expression.replace(/(\d+(?:\.\d+)?)\s*%/g, '($1/100)');
-        
+
         let result = eval(expression);
         if (!isFinite(result) || isNaN(result)) {
             display.value = 'Error';
