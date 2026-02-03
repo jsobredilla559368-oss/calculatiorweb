@@ -67,13 +67,5 @@ icons.forEach(icon => {
     icon.classList.toggle('active');
 });
 
-// Check saved preference on load
-window.onload = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        body.classList.add('dark');
-        icons[0].classList.remove('active'); // Sun
-        icons[1].classList.add('active');    // Moon
-    }
-};
+
 
